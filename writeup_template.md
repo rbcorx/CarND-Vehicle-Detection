@@ -46,15 +46,15 @@ The goals / steps of this project are the following:
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
 
 You're reading it!
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
 The code for the hog extraction function is contained in lines 36 through 50 of the file called `utils.py`.
 
@@ -68,13 +68,13 @@ Here is an example of a training image and it's HOG
 ![alt text][hog_car]
 ![alt text][hog]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 I tried various combinations of parameters and noticed that what worked best for the classifier was that I use all the channels to create the HOG features and increase the orientations bin size as much as possible. But this had the added downside of making training extremely slow and the feature vector could blow out of proportions.
 
 So after experimentation, I settled for only using the L channel in the LUV colorspace for extracting the HOG features and using 8 as the orientation bin size. THough increasing the bin size increased accuracy but the classifier was displaying enough accuracy for our purposes.
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I used gridsearch to try to fine tune the model and discovered that rbf worked better but as it took longer time, I instead focused on using the simpler linear kernel and increased the accuracy by tuning the feature extraction process.
 
@@ -89,7 +89,7 @@ pix_per_cell = 8
 
 ###Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 Basic sliding window algorithm implemented is the same which is presented in Udacity's lectures. It allows to search a car in a desired region of the frame with a desired window size (each subsampled window is rescaled to 64x64 px for classification).
 
@@ -119,7 +119,7 @@ As we can see on examples above, the classifier successfully finds cars on the t
 
 ![alt text][windows]
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched in three ways: (lines 398 - 427, `utils.py`)
 * detecting new vehicles, larger scale
@@ -138,11 +138,11 @@ I cut down on the feature space as much as possible to optimize it further by on
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video_proc.mp4)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 The code for this starts at line 324 in `utils.py`.
 
@@ -152,17 +152,17 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ![alt text][test5]
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
+### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap:
 ![alt text][heatmap]
 
-### Here the resulting bounding boxes are drawn onto the last frame:
+### Here the resulting bounding boxes are drawn onto the frame:
 ![alt text][bound]
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
 
