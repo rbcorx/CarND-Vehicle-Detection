@@ -36,9 +36,9 @@ The goals / steps of this project are the following:
 [test2]: ./examples/test2.png
 [test1]: ./examples/test1.png
 [windows]: ./examples/windows.png
-[hog_car]: ./examples/hog_car.png
-[hog]: ./examples/hog.png
-[heatmap]: ./examples/heatmap.png
+[hog_car]: ./examples/hog_car.jpg
+[hog]: ./examples/hog.jpg
+[heatmap]: ./examples/heatmap.jpg
 [roi]: ./examples/roi.png
 [bound]: ./examples/bound.png
 
